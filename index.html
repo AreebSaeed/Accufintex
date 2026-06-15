@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accufintex — Your Trusted Growth Partner. Finance, technology, and business solutions for startups and enterprises in Pakistan and beyond.">
+  <title>Accufintex | Your Trusted Growth Partner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0A0F1E;
+      --surface: #0F172A;
+      --card: #111827;
+      --primary: #00D4FF;
+      --secondary: #7C3AED;
+      --gradient: linear-gradient(135deg, #00D4FF 0%, #7C3AED 100%);
+      --text-primary: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border-subtle: rgba(255, 255, 255, 0.07);
+      --success: #10B981;
+      --nav-height: 80px;
+      --section-padding: 100px;
+      --section-padding-mobile: 60px;
+      --container-max: 1200px;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: 0.3s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    img, svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── Typography ── */
+    .display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .btn:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    .btn-primary {
+      background: var(--gradient);
+      color: var(--bg);
+      box-shadow: 0 4px 24px rgba(0, 212, 255, 0.25);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .btn-primary:hover {
+        box-shadow: 0 6px 32px rgba(0, 212, 255, 0.4);
+        filter: brightness(1.1);
+      }
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      background: rgba(0, 212, 255, 0.08);
+    }
+
+    .btn-nav {
+      padding: 10px 22px;
+      font-size: 14px;
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-nav:hover {
+      background: var(--primary);
+      color: var(--bg);
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      transition: background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .logo-icon {
+      height: 40px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .logo-wordmark {
+      height: 26px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+      flex-shrink: 0;
+      /* Lighten navy wordmark for dark backgrounds */
+      filter: brightness(0) invert(1);
+      opacity: 0.94;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-primary);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .mobile-drawer {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background: rgba(10, 15, 30, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 24px;
+      transform: translateY(-110%);
+      transition: transform 0.4s ease;
+      z-index: 999;
+    }
+
+    .mobile-drawer.open {
+      transform: translateY(0);
+    }
+
+    .mobile-drawer a {
+      display: block;
+      padding: 14px 0;
+      font-size: 16px;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .mobile-drawer a:last-of-type {
+      border-bottom: none;
+    }
+
+    .mobile-drawer .btn-nav {
+      margin-top: 16px;
+      width: 100%;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: var(--nav-height);
+    }
+
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.35;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-grid-bg {
+        animation: gridPulse 5s ease-in-out infinite;
+      }
+
+      @keyframes gridPulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.6; }
+      }
+    }
+
+    .hero-orb {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, rgba(124, 58, 237, 0.08) 40%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-orb-1 {
+      top: -10%;
+      right: -5%;
+    }
+
+    .hero-orb-2 {
+      bottom: 10%;
+      left: -10%;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.12) 0%, transparent 70%);
+    }
+
+    .hero-glass {
+      position: absolute;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-glass-1 {
+      width: 180px;
+      height: 180px;
+      top: 18%;
+      right: 12%;
+      transform: rotate(12deg);
+    }
+
+    .hero-glass-2 {
+      width: 120px;
+      height: 120px;
+      bottom: 25%;
+      right: 28%;
+      transform: rotate(-8deg);
+    }
+
+    .hero-glass-3 {
+      width: 140px;
+      height: 140px;
+      top: 35%;
+      left: 5%;
+      transform: rotate(6deg);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .blink-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .blink-dot {
+        animation: blink 2s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--primary); }
+        50% { opacity: 0.3; box-shadow: none; }
+      }
+    }
+
+    .hero-headline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 72px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0;
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      padding: 0 28px;
+    }
+
+    .hero-stat:first-child {
+      padding-left: 0;
+    }
+
+    .hero-stat-number {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .hero-stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border-subtle);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: var(--text-muted);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .scroll-indicator {
+        animation: bounce 2s ease-in-out infinite;
+      }
+
+      @keyframes bounce {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(8px); }
+      }
+    }
+
+    /* Hero load animations */
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-animate {
+        opacity: 0;
+        transform: translateY(24px);
+        animation: heroFadeIn 0.7s ease forwards;
+      }
+
+      .hero-animate-delay-1 { animation-delay: 0.1s; }
+      .hero-animate-delay-2 { animation-delay: 0.2s; }
+      .hero-animate-delay-3 { animation-delay: 0.3s; }
+      .hero-animate-delay-4 { animation-delay: 0.4s; }
+
+      @keyframes heroFadeIn {
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: var(--section-padding) 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+    }
+
+    .section-header .eyebrow {
+      margin-bottom: 12px;
+    }
+
+    .section-header .section-title {
+      margin-bottom: 16px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 17px;
+    }
+
+    /* ── Services ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .service-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(0, 212, 255, 0.4);
+        box-shadow: 0 12px 40px rgba(0, 212, 255, 0.12), 0 0 0 1px rgba(0, 212, 255, 0.1);
+      }
+    }
+
+    .service-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+
+    .service-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .service-card ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .service-card li {
+      font-size: 14px;
+      color: var(--text-muted);
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .service-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--primary);
+      opacity: 0.6;
+    }
+
+    /* ── Why Us ── */
+    .why-section {
+      background: var(--surface);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .why-left .section-title {
+      margin-bottom: 20px;
+    }
+
+    .why-left p {
+      color: var(--text-muted);
+      font-size: 17px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .trusted-line {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    .trusted-line svg {
+      flex-shrink: 0;
+      opacity: 0.4;
+    }
+
+    .reason-chips {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .reason-chip {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-primary);
+    }
+
+    .check-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      color: var(--success);
+      margin-top: 1px;
+    }
+
+    /* ── Pillars ── */
+    .pillars-section {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillars-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.04) 0%, transparent 50%, rgba(124, 58, 237, 0.04) 100%);
+      pointer-events: none;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pillar-card {
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      border-top: 3px solid var(--primary);
+      transition: transform 0.4s ease;
+    }
+
+    .pillar-card:nth-child(2) {
+      border-top-color: var(--secondary);
+    }
+
+    .pillar-card:nth-child(3) {
+      border-top-color: var(--success);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .pillar-card.reveal {
+        transform: perspective(800px) rotateX(8deg) translateY(30px);
+        opacity: 0;
+      }
+
+      .pillar-card.reveal.visible {
+        transform: perspective(800px) rotateX(0) translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .pillar-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .pillar-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .pillar-card p {
+      color: var(--text-muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── Contact ── */
+    .contact-section {
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, rgba(124, 58, 237, 0.06) 50%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-title {
+      margin-bottom: 12px;
+    }
+
+    .contact-inner > p {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      font-size: 17px;
+    }
+
+    .contact-form {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15);
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    .form-group select option {
+      background: var(--card);
+      color: var(--text-primary);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-success {
+      display: none;
+      padding: 16px 20px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--success);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    .form-error {
+      display: none;
+      padding: 16px 20px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: var(--radius-sm);
+      color: #F87171;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .form-error.show {
+      display: block;
+    }
+
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .contact-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .contact-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 100px;
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    a.contact-chip:hover {
+      border-color: rgba(0, 212, 255, 0.3);
+      color: var(--text-primary);
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid rgba(0, 212, 255, 0.2);
+      padding: 48px 0 32px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .footer-logo {
+      margin-bottom: 10px;
+    }
+
+    .footer-logo .logo-icon {
+      height: 44px;
+    }
+
+    .footer-logo .logo-wordmark {
+      height: 30px;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 260px;
+      line-height: 1.5;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: var(--text-muted);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-copy {
+      text-align: right;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-motto {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 13px;
+      color: var(--text-muted);
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    /* ── About anchor (minimal) ── */
+    #about {
+      scroll-margin-top: var(--nav-height);
+    }
+
+    #services, #why-us, #contact {
+      scroll-margin-top: var(--nav-height);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      :root {
+        --section-padding: 60px;
+      }
+
+      .nav-links,
+      .nav .btn-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-drawer {
+        display: block;
+      }
+
+      .hero-headline {
+        font-size: 48px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .footer-tagline {
+        max-width: none;
+      }
+
+      .footer-links {
+        justify-content: center;
+      }
+
+      .footer-copy {
+        text-align: center;
+      }
+
+      .hero-glass {
+        display: none;
+      }
+
+      .hero-stat-divider {
+        display: none;
+      }
+
+      .hero-stat {
+        padding: 8px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-icon {
+        height: 34px;
+      }
+
+      .logo-wordmark {
+        height: 22px;
+      }
+
+      .hero-headline {
+        font-size: 38px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .hero-ctas .btn {
+        width: 100%;
+      }
+
+      .reason-chips {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="logo" aria-label="Accufintex home">
+        <img src="logo.png" alt="" class="logo-icon" width="40" height="40" aria-hidden="true">
+        <img src="namepicture.png" alt="Accufintex" class="logo-wordmark" width="140" height="26">
+      </a>
+      <div class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-nav">Get Started</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-drawer" id="mobileDrawer" aria-label="Mobile navigation">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#why-us">Why Us</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-nav">Get Started</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" id="hero" aria-label="Hero">
+    <svg class="hero-grid-bg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="dotGrid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+          <circle cx="16" cy="16" r="1.2" fill="#00D4FF"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#dotGrid)"/>
+    </svg>
+
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <div class="hero-glass hero-glass-1" aria-hidden="true"></div>
+    <div class="hero-glass hero-glass-2" aria-hidden="true"></div>
+    <div class="hero-glass hero-glass-3" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow hero-animate">
+          <span class="blink-dot" aria-hidden="true"></span>
+          <span class="eyebrow">Your Trusted Growth Partner</span>
+        </div>
+        <h1 class="hero-headline hero-animate hero-animate-delay-1">
+          Financial Excellence.<br>
+          Technology-Driven Growth.
+        </h1>
+        <p class="hero-sub hero-animate hero-animate-delay-2">
+          Accufintex combines accounting expertise, taxation compliance, ERP automation, and digital solutions to help businesses thrive.
+        </p>
+        <div class="hero-ctas hero-animate hero-animate-delay-3">
+          <a href="#services" class="btn btn-primary">Explore Our Services</a>
+          <a href="#contact" class="btn btn-outline">Book a Consultation</a>
+        </div>
+        <div class="hero-stats hero-animate hero-animate-delay-4">
+          <div class="hero-stat">
+            <span class="hero-stat-number" data-count="200" data-suffix="+">0+</span>
+            <span class="hero-stat-label">Clients Served</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-number" data-count="7">0</span>
+            <span class="hero-stat-label">Service Verticals</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-number" style="font-size:20px;">Global</span>
+            <span class="hero-stat-label">Pakistan &amp; Beyond</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#services" class="scroll-indicator" aria-label="Scroll to services">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </a>
+  </section>
+
+  <!-- Services -->
+  <section id="services" aria-label="Services">
+    <div class="container">
+      <header class="section-header reveal">
+        <p class="eyebrow">What We Do</p>
+        <h2 class="section-title">Everything Your Business Needs, Under One Roof</h2>
+      </header>
+      <div class="services-grid">
+
+        <article class="service-card reveal" style="transition-delay: 0s;">
+          <div class="service-icon" aria-hidden="true">📊</div>
+          <h3>Accounting &amp; Bookkeeping</h3>
+          <ul>
+            <li>Financial Accounting</li>
+            <li>Bookkeeping</li>
+            <li>Financial Statements</li>
+            <li>Payroll</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal" style="transition-delay: 0.1s;">
+          <div class="service-icon" aria-hidden="true">💹</div>
+          <h3>Financial Services</h3>
+          <ul>
+            <li>FP&amp;A</li>
+            <li>Budgeting</li>
+            <li>Cash Flow Management</li>
+            <li>CFO Services</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal" style="transition-delay: 0.2s;">
+          <div class="service-icon" aria-hidden="true">🏛️</div>
+          <h3>Pakistan Taxation</h3>
+          <ul>
+            <li>Income Tax</li>
+            <li>Sales Tax</li>
+            <li>FBR Compliance</li>
+            <li>Tax Planning</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal" style="transition-delay: 0.3s;">
+          <div class="service-icon" aria-hidden="true">🧠</div>
+          <h3>Business Consulting</h3>
+          <ul>
+            <li>Company Incorporation</li>
+            <li>Strategic Planning</li>
+            <li>Risk Management</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal" style="transition-delay: 0.4s;">
+          <div class="service-icon" aria-hidden="true">⚙️</div>
+          <h3>ERP &amp; Automation</h3>
+          <ul>
+            <li>ERP Implementation</li>
+            <li>Process Automation</li>
+            <li>CRM Integration</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal" style="transition-delay: 0.5s;">
+          <div class="service-icon" aria-hidden="true">🌐</div>
+          <h3>Web Development</h3>
+          <ul>
+            <li>Corporate Websites</li>
+            <li>E-Commerce</li>
+            <li>Custom Web Apps</li>
+          </ul>
+        </article>
+
+        <article class="service-card reveal" style="transition-delay: 0.6s;">
+          <div class="service-icon" aria-hidden="true">🎨</div>
+          <h3>Graphic Design &amp; Branding</h3>
+          <ul>
+            <li>Logo Design</li>
+            <li>Brand Identity</li>
+            <li>Marketing Materials</li>
+          </ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-section" id="why-us" aria-label="Why choose us">
+    <div class="container">
+      <div class="why-grid">
+        <div class="why-left reveal">
+          <p class="eyebrow">Why Accufintex</p>
+          <h2 class="section-title">Built for Business Success</h2>
+          <p>We deliver integrated financial, tax, and technology solutions tailored for startups, SMEs, and enterprises — helping you navigate Pakistan's regulatory landscape while scaling with confidence.</p>
+          <div class="trusted-line">
+            <svg width="80" height="48" viewBox="0 0 80 48" fill="none" aria-hidden="true">
+              <ellipse cx="40" cy="24" rx="36" ry="20" stroke="#00D4FF" stroke-width="0.8" opacity="0.5"/>
+              <path d="M8 24 Q20 10 40 14 Q60 18 72 24 Q60 38 40 34 Q20 30 8 24" stroke="#7C3AED" stroke-width="0.8" opacity="0.4" fill="none"/>
+              <circle cx="40" cy="22" r="3" fill="#00D4FF" opacity="0.6"/>
+            </svg>
+            <span>Trusted by businesses across Pakistan</span>
+          </div>
+        </div>
+        <div class="reason-chips">
+          <div class="reason-chip reveal" style="transition-delay: 0s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Comprehensive Finance, Tax &amp; Technology Solutions
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.05s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Experienced Team of Professionals
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.1s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Accuracy, Compliance &amp; Transparency
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.15s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Customized Business Solutions
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.2s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Technology-Driven Approach
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.25s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Cost-Effective Services
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.3s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Client-Focused Support
+          </div>
+          <div class="reason-chip reveal" style="transition-delay: 0.35s;">
+            <svg class="check-icon" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Long-Term Business Partnership
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Mission Vision Commitment -->
+  <section class="pillars-section" id="about" aria-label="About Accufintex">
+    <div class="container">
+      <header class="section-header reveal">
+        <p class="eyebrow">Our Foundation</p>
+        <h2 class="section-title">Mission, Vision &amp; Commitment</h2>
+      </header>
+      <div class="pillars-grid">
+        <article class="pillar-card reveal" style="transition-delay: 0s;">
+          <div class="pillar-icon" aria-hidden="true">🎯</div>
+          <h3>Mission</h3>
+          <p>To empower startups, SMEs, and enterprises across Pakistan with integrated financial, tax, and technology solutions — enabling sustainable growth through accuracy, innovation, and trusted partnership.</p>
+        </article>
+        <article class="pillar-card reveal" style="transition-delay: 0.15s;">
+          <div class="pillar-icon" aria-hidden="true">🔭</div>
+          <h3>Vision</h3>
+          <p>To become Pakistan's most trusted business solutions partner — where finance meets technology, and every business, regardless of size, has access to world-class expertise and tools to compete globally.</p>
+        </article>
+        <article class="pillar-card reveal" style="transition-delay: 0.3s;">
+          <div class="pillar-icon" aria-hidden="true">🤝</div>
+          <h3>Commitment</h3>
+          <p>We are committed to delivering transparent, compliant, and customized services with unwavering client focus — building long-term partnerships rooted in integrity, excellence, and measurable business outcomes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact-section" id="contact" aria-label="Contact">
+    <div class="contact-orb" aria-hidden="true"></div>
+    <div class="container">
+      <div class="contact-inner reveal">
+        <h2 class="section-title">Ready to Transform Your Business?</h2>
+        <p>Partner with Accufintex for expert financial, technology, and growth solutions.</p>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <input type="text" name="_honeypot" id="_honeypot" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp Number</label>
+              <input type="tel" id="whatsapp" name="whatsapp" placeholder="+92 300 1234567" required autocomplete="tel">
+            </div>
+            <div class="form-group">
+              <label for="service">Service</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="accounting">Accounting &amp; Bookkeeping</option>
+                <option value="financial">Financial Services</option>
+                <option value="taxation">Pakistan Taxation</option>
+                <option value="consulting">Business Consulting</option>
+                <option value="erp">ERP &amp; Automation</option>
+                <option value="web">Web Development</option>
+                <option value="design">Graphic Design &amp; Branding</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell us about your business needs..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="formSubmitBtn" style="width:100%;margin-top:8px;">Send Message →</button>
+          <div class="form-success" id="formSuccess" role="status">Message emailed successfully! WhatsApp is opening — tap Send to deliver your inquiry.</div>
+          <div class="form-error" id="formError" role="alert"></div>
+        </form>
+
+        <div class="contact-chips">
+          <a href="mailto:accufintex@gmail.com" class="contact-chip">📧 accufintex@gmail.com</a>
+          <a href="https://wa.me/923208305398" class="contact-chip" target="_blank" rel="noopener noreferrer">📞 +92 320 8305398</a>
+          <span class="contact-chip">📍 Karachi, Pakistan</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer aria-label="Footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">
+            <a href="#" class="logo" aria-label="Accufintex home">
+              <img src="logo.png" alt="" class="logo-icon" width="44" height="44" aria-hidden="true">
+              <img src="namepicture.png" alt="Accufintex" class="logo-wordmark" width="160" height="30">
+            </a>
+          </div>
+          <p class="footer-tagline">Your Trusted Growth Partner</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <p class="footer-copy">&copy; 2025 Accufintex. All rights reserved.</p>
+      </div>
+      <p class="footer-motto">Accuracy. Innovation. Growth.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ── Nav scroll ── */
+      var nav = document.getElementById('nav');
+      function onScroll() {
+        if (window.scrollY > 80) {
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      /* ── Mobile menu ── */
+      var hamburger = document.getElementById('hamburger');
+      var drawer = document.getElementById('mobileDrawer');
+
+      hamburger.addEventListener('click', function () {
+        var isOpen = drawer.classList.toggle('open');
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+      });
+
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          drawer.classList.remove('open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      /* ── IntersectionObserver scroll reveals ── */
+      var revealEls = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        revealEls.forEach(function (el) {
+          revealObserver.observe(el);
+        });
+      } else {
+        revealEls.forEach(function (el) {
+          el.classList.add('visible');
+        });
+      }
+
+      /* ── Stat counter animation ── */
+      function animateCounter(el) {
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (isNaN(target)) return;
+
+        var duration = 1800;
+        var start = 0;
+        var startTime = null;
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var progress = Math.min((timestamp - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.floor(start + (target - start) * eased);
+          el.textContent = current + suffix;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target + suffix;
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      var statNumbers = document.querySelectorAll('.hero-stat-number[data-count]');
+      if ('IntersectionObserver' in window) {
+        var counterObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.5 });
+
+        statNumbers.forEach(function (el) {
+          counterObserver.observe(el);
+        });
+      } else {
+        statNumbers.forEach(animateCounter);
+      }
+
+      /* ── Contact form → Email + WhatsApp ── */
+      var ACCUFINTEX_EMAIL = 'accufintex@gmail.com';
+      var ACCUFINTEX_WHATSAPP = '923208305398';
+
+      /*
+       * Web3Forms (recommended — instant delivery, no activation step):
+       * 1. Go to https://web3forms.com
+       * 2. Enter accufintex@gmail.com and click "Create Access Key"
+       * 3. Paste the key below (emailed to you within seconds)
+       */
+      var WEB3FORMS_ACCESS_KEY = '99ff9fd6-3d9f-4725-8d84-9806f49e4ddc';
+
+      var serviceLabels = {
+        accounting: 'Accounting & Bookkeeping',
+        financial: 'Financial Services',
+        taxation: 'Pakistan Taxation',
+        consulting: 'Business Consulting',
+        erp: 'ERP & Automation',
+        web: 'Web Development',
+        design: 'Graphic Design & Branding'
+      };
+
+      var form = document.getElementById('contactForm');
+      var formSuccess = document.getElementById('formSuccess');
+      var formError = document.getElementById('formError');
+      var formSubmitBtn = document.getElementById('formSubmitBtn');
+
+      function buildInquiryMessage(data) {
+        return (
+          '*New Accufintex Website Inquiry*\n\n' +
+          '*Name:* ' + data.name + '\n' +
+          '*Email:* ' + data.email + '\n' +
+          '*WhatsApp:* ' + data.whatsapp + '\n' +
+          '*Service:* ' + data.service + '\n\n' +
+          '*Message:*\n' + data.message
+        );
+      }
+
+      function isValidWhatsAppNumber(value) {
+        var digits = value.replace(/\D/g, '');
+        return digits.length >= 10 && digits.length <= 15;
+      }
+
+      function isLocalFile() {
+        return window.location.protocol === 'file:';
+      }
+
+      function plainInquiryText(data) {
+        return (
+          'New Accufintex Website Inquiry\n\n' +
+          'Name: ' + data.name + '\n' +
+          'Email: ' + data.email + '\n' +
+          'WhatsApp: ' + data.whatsapp + '\n' +
+          'Service: ' + data.service + '\n\n' +
+          'Message:\n' + data.message
+        );
+      }
+
+      function openWhatsApp(message) {
+        var url = 'https://wa.me/' + ACCUFINTEX_WHATSAPP + '?text=' + encodeURIComponent(message);
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+
+      function parseEmailResponse(json) {
+        if (!json) throw new Error('No response from email service.');
+        var ok = json.success === true || json.success === 'true';
+        if (!ok) throw new Error(json.message || 'Email delivery failed.');
+        return json;
+      }
+
+      function sendViaWeb3Forms(data, formattedMessage) {
+        return fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject: 'New Accufintex Inquiry — ' + data.service,
+            from_name: 'Accufintex Website',
+            name: data.name,
+            email: data.email,
+            whatsapp: data.whatsapp,
+            service: data.service,
+            message: data.message,
+            inquiry: formattedMessage,
+            replyto: data.email,
+            botcheck: ''
+          })
+        }).then(function (res) {
+          return res.json().then(function (json) {
+            if (!res.ok) throw new Error(json.message || 'Email delivery failed.');
+            return parseEmailResponse(json);
+          });
+        });
+      }
+
+      function sendViaMailto(data) {
+        var subject = encodeURIComponent('New Accufintex Inquiry — ' + data.service);
+        var body = encodeURIComponent(plainInquiryText(data));
+        window.location.href = 'mailto:' + ACCUFINTEX_EMAIL + '?subject=' + subject + '&body=' + body;
+        return Promise.resolve({ success: true, method: 'mailto' });
+      }
+
+      function sendViaFormSubmit(data, formattedMessage) {
+        var formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('whatsapp', data.whatsapp);
+        formData.append('service', data.service);
+        formData.append('message', data.message);
+        formData.append('inquiry', formattedMessage);
+        formData.append('_subject', 'New Accufintex Inquiry — ' + data.service);
+        formData.append('_template', 'table');
+        formData.append('_replyto', data.email);
+
+        return fetch('https://formsubmit.co/ajax/' + ACCUFINTEX_EMAIL, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: formData
+        }).then(function (res) {
+          return res.json().then(function (json) {
+            return parseEmailResponse(json);
+          });
+        });
+      }
+
+      function sendEmail(data, formattedMessage) {
+        if (isLocalFile() && !WEB3FORMS_ACCESS_KEY) {
+          return sendViaMailto(data);
+        }
+
+        var sender = WEB3FORMS_ACCESS_KEY
+          ? sendViaWeb3Forms(data, formattedMessage)
+          : sendViaFormSubmit(data, formattedMessage);
+
+        return sender.catch(function (err) {
+          if (isLocalFile() || /web server|HTML files/i.test(err.message || '')) {
+            return sendViaMailto(data);
+          }
+          throw err;
+        });
+      }
+
+      function getEmailErrorMessage(err) {
+        var msg = (err && err.message) ? err.message : 'Email could not be sent.';
+
+        if (/activation|activate form/i.test(msg)) {
+          return 'FormSubmit needs activation: check accufintex@gmail.com (and spam) for an email from FormSubmit and click "Activate Form". Until then, use WhatsApp below.';
+        }
+        if (/web server|HTML files/i.test(msg)) {
+          return 'Could not send email automatically. WhatsApp is opening with your message — please tap Send to reach us.';
+        }
+        if (/access_key|access key/i.test(msg)) {
+          return 'Email service not configured. Add your Web3Forms access key in the site code, or activate FormSubmit via the link sent to accufintex@gmail.com.';
+        }
+
+        return msg + ' WhatsApp is opening with your message — please tap Send to reach us.';
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        formSuccess.classList.remove('show');
+        formError.classList.remove('show');
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var whatsapp = document.getElementById('whatsapp').value.trim();
+        var serviceKey = document.getElementById('service').value;
+        var message = document.getElementById('message').value.trim();
+        var service = serviceLabels[serviceKey] || serviceKey;
+
+        if (!isValidWhatsAppNumber(whatsapp)) {
+          formError.textContent = 'Please enter a valid WhatsApp number (at least 10 digits, including country code).';
+          formError.classList.add('show');
+          document.getElementById('whatsapp').focus();
+          return;
+        }
+
+        var inquiryData = { name: name, email: email, whatsapp: whatsapp, service: service, message: message };
+        var formattedMessage = buildInquiryMessage(inquiryData);
+
+        formSubmitBtn.disabled = true;
+        formSubmitBtn.textContent = 'Sending…';
+
+        sendEmail(inquiryData, formattedMessage)
+          .then(function (result) {
+            openWhatsApp(formattedMessage);
+            if (result && result.method === 'mailto') {
+              formSuccess.textContent = 'Your email app is opening with the inquiry — tap Send to email us. WhatsApp is also opening.';
+            } else {
+              formSuccess.textContent = 'Message emailed successfully! WhatsApp is opening — tap Send to deliver your inquiry.';
+            }
+            formSuccess.classList.add('show');
+            form.reset();
+          })
+          .catch(function (err) {
+            openWhatsApp(formattedMessage);
+            formError.textContent = getEmailErrorMessage(err);
+            formError.classList.add('show');
+          })
+          .finally(function () {
+            formSubmitBtn.disabled = false;
+            formSubmitBtn.textContent = 'Send Message →';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
