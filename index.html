@@ -1373,7 +1373,7 @@
         <p>Partner with Accufintex for expert financial, technology, and growth solutions.</p>
 
         <form class="contact-form" id="contactForm" novalidate>
-          <input type="text" name="_honeypot" id="_honeypot" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <input type="hidden" name="_honeypot" id="_honeypot" tabindex="-1" value="">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name</label>
@@ -1631,7 +1631,6 @@
       }
 
       function buildWeb3FormsPayload(data, formattedMessage) {
-        var honeypot = document.getElementById('_honeypot');
         return {
           access_key: WEB3FORMS_ACCESS_KEY,
           subject: 'New Accufintex Inquiry — ' + data.service,
@@ -1644,7 +1643,7 @@
           inquiry: formattedMessage,
           replyto: data.email,
           page_url: window.location.href,
-          botcheck: honeypot ? honeypot.value : ''
+          botcheck: '' 
         };
       }
 
@@ -1828,7 +1827,6 @@
             form.reset();
           })
           .catch(function (err) {
-            openWhatsApp(formattedMessage);
             formError.textContent = getEmailErrorMessage(err);
             showFormFeedback(formError);
           })
