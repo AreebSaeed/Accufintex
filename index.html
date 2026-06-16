@@ -1373,7 +1373,6 @@
         <p>Partner with Accufintex for expert financial, technology, and growth solutions.</p>
 
         <form class="contact-form" id="contactForm" novalidate>
-          <input type="hidden" name="_honeypot" id="_honeypot" tabindex="-1" value="">
           <div class="form-row">
             <div class="form-group">
               <label for="name">Name</label>
@@ -1642,8 +1641,7 @@
           message: data.message,
           inquiry: formattedMessage,
           replyto: data.email,
-          page_url: window.location.href,
-          botcheck: '' 
+          page_url: window.location.href
         };
       }
 
