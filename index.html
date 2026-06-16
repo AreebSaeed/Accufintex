@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta name="description" content="Accufintex — Your Trusted Growth Partner. Finance, technology, and business solutions for startups and enterprises in Pakistan and beyond.">
   <title>Accufintex | Your Trusted Growth Partner</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1391,7 +1392,7 @@
             <div class="form-group">
               <label for="service">Service</label>
               <select id="service" name="service" required>
-                <option value="" disabled selected>Select a service</option>
+                <option value="" selected>Select a service</option>
                 <option value="accounting">Accounting &amp; Bookkeeping</option>
                 <option value="financial">Financial Services</option>
                 <option value="taxation">Pakistan Taxation</option>
@@ -1590,6 +1591,16 @@
         return window.location.protocol === 'file:';
       }
 
+      function isMobileDevice() {
+        return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      }
+
+      function showFormFeedback(el) {
+        if (!el) return;
+        el.classList.add('show');
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
       function plainInquiryText(data) {
         return (
           'New Accufintex Website Inquiry\n\n' +
@@ -1603,7 +1614,13 @@
 
       function openWhatsApp(message) {
         var url = 'https://wa.me/' + ACCUFINTEX_WHATSAPP + '?text=' + encodeURIComponent(message);
-        window.open(url, '_blank', 'noopener,noreferrer');
+        if (isMobileDevice()) {
+          setTimeout(function () {
+            window.location.href = url;
+          }, 1200);
+        } else {
+          window.open(url, '_blank', 'noopener,noreferrer');
+        }
       }
 
       function parseEmailResponse(json) {
@@ -1613,31 +1630,77 @@
         return json;
       }
 
+      function buildWeb3FormsPayload(data, formattedMessage) {
+        var honeypot = document.getElementById('_honeypot');
+        return {
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: 'New Accufintex Inquiry — ' + data.service,
+          from_name: 'Accufintex Website',
+          name: data.name,
+          email: data.email,
+          whatsapp: data.whatsapp,
+          service: data.service,
+          message: data.message,
+          inquiry: formattedMessage,
+          replyto: data.email,
+          page_url: window.location.href,
+          botcheck: honeypot ? honeypot.value : ''
+        };
+      }
+
+      function postJsonWithXHR(url, payload) {
+        return new Promise(function (resolve, reject) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', url, true);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.setRequestHeader('Accept', 'application/json');
+          xhr.timeout = 30000;
+          xhr.onload = function () {
+            var json;
+            try {
+              json = JSON.parse(xhr.responseText || '{}');
+            } catch (parseErr) {
+              reject(new Error('No response from email service.'));
+              return;
+            }
+            if (xhr.status >= 200 && xhr.status < 300) {
+              resolve(parseEmailResponse(json));
+              return;
+            }
+            reject(new Error(json.message || 'Email delivery failed.'));
+          };
+          xhr.onerror = function () {
+            reject(new Error('Network error. Check your mobile connection and try again.'));
+          };
+          xhr.ontimeout = function () {
+            reject(new Error('Request timed out. Please try again.'));
+          };
+          xhr.send(JSON.stringify(payload));
+        });
+      }
+
       function sendViaWeb3Forms(data, formattedMessage) {
-        return fetch('https://api.web3forms.com/submit', {
+        var payload = buildWeb3FormsPayload(data, formattedMessage);
+        var request = fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify({
-            access_key: WEB3FORMS_ACCESS_KEY,
-            subject: 'New Accufintex Inquiry — ' + data.service,
-            from_name: 'Accufintex Website',
-            name: data.name,
-            email: data.email,
-            whatsapp: data.whatsapp,
-            service: data.service,
-            message: data.message,
-            inquiry: formattedMessage,
-            replyto: data.email,
-            botcheck: ''
-          })
+          body: JSON.stringify(payload)
         }).then(function (res) {
           return res.json().then(function (json) {
             if (!res.ok) throw new Error(json.message || 'Email delivery failed.');
             return parseEmailResponse(json);
           });
+        });
+
+        return request.catch(function (err) {
+          var msg = (err && err.message) ? err.message : '';
+          if (/load failed|failed to fetch|network error/i.test(msg) && typeof XMLHttpRequest !== 'undefined') {
+            return postJsonWithXHR('https://api.web3forms.com/submit', payload);
+          }
+          throw err;
         });
       }
 
@@ -1676,13 +1739,18 @@
           return sendViaMailto(data);
         }
 
-        var sender = WEB3FORMS_ACCESS_KEY
+        var primary = WEB3FORMS_ACCESS_KEY
           ? sendViaWeb3Forms(data, formattedMessage)
           : sendViaFormSubmit(data, formattedMessage);
 
-        return sender.catch(function (err) {
+        return primary.catch(function (err) {
           if (isLocalFile() || /web server|HTML files/i.test(err.message || '')) {
             return sendViaMailto(data);
+          }
+          if (WEB3FORMS_ACCESS_KEY) {
+            return sendViaFormSubmit(data, formattedMessage).catch(function (fallbackErr) {
+              throw err || fallbackErr;
+            });
           }
           throw err;
         });
@@ -1699,6 +1767,12 @@
         }
         if (/access_key|access key/i.test(msg)) {
           return 'Email service not configured. Add your Web3Forms access key in the site code, or activate FormSubmit via the link sent to accufintex@gmail.com.';
+        }
+        if (/rate limit|too many requests|429/i.test(msg)) {
+          return 'Too many attempts from this connection. Wait about an hour and try again, or message us on WhatsApp below.';
+        }
+        if (/network error|load failed|failed to fetch|timed out/i.test(msg)) {
+          return 'Could not reach the email service on this device. Check your internet connection. WhatsApp is opening with your message — tap Send to reach us.';
         }
 
         return msg + ' WhatsApp is opening with your message — please tap Send to reach us.';
@@ -1722,9 +1796,16 @@
         var message = document.getElementById('message').value.trim();
         var service = serviceLabels[serviceKey] || serviceKey;
 
+        if (!serviceKey) {
+          formError.textContent = 'Please select a service from the list.';
+          showFormFeedback(formError);
+          document.getElementById('service').focus();
+          return;
+        }
+
         if (!isValidWhatsAppNumber(whatsapp)) {
           formError.textContent = 'Please enter a valid WhatsApp number (at least 10 digits, including country code).';
-          formError.classList.add('show');
+          showFormFeedback(formError);
           document.getElementById('whatsapp').focus();
           return;
         }
@@ -1743,13 +1824,13 @@
             } else {
               formSuccess.textContent = 'Message emailed successfully! WhatsApp is opening — tap Send to deliver your inquiry.';
             }
-            formSuccess.classList.add('show');
+            showFormFeedback(formSuccess);
             form.reset();
           })
           .catch(function (err) {
             openWhatsApp(formattedMessage);
             formError.textContent = getEmailErrorMessage(err);
-            formError.classList.add('show');
+            showFormFeedback(formError);
           })
           .finally(function () {
             formSubmitBtn.disabled = false;
